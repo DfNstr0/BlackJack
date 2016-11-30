@@ -1,0 +1,176 @@
+// MODULO 2
+// 1. Programa un ejemplo que, dada una variable de tipo cadena con la carta del 4 de corazones, compruebe si es de corazones y además es el número 4. En caso afirmativo, lo imprimimos en la consola.
+
+var carta = "4C";
+if (carta[1] === "C"){
+	if (carta[0] === "4"){
+		console.log(carta);
+	}
+}
+
+
+// 2. Utiliza un bucle para recorrer todos los años bisiestos anteriores a 2050, e imprímelos en la consola.
+
+var i=1;
+do {
+	if (i%4===0 && i%100!==0 || i%100===0 && i%400===0){
+		console.log(i);
+	}
+	i=i+1
+}while (i<=2050)
+
+
+// 3. Utiliza un bucle para recorrer todas las cartas de la baraja, desde el 1 al 12 de cada palo. Imprime en pantalla solamente las cartas rojas que sea múltiplos de 3.
+
+var color="PDTC";
+for (var i=0; i<=3; i=i+1){
+	for (var j=1; j<=12; j=j+1){	
+		if (color[i]==="D" && j%3===0 || color[i]==="C" && j%3===0){
+			console.log(j+color[i]);
+		}
+	}
+}
+
+
+
+// MODULO 3
+// 1. Programa un ejemplo que almacene en un array todas las cartas de la baraja, cada una representada con un diccionario que tenga un palo y un valor.
+
+var array=[]
+var palos=["P", "D", "T", "C"]
+for (i=0; i<=3; i=i+1){
+	for (j=1; j<=12; j=j+1){
+		array[array.length] = {palo : palos[i], valor : j}
+	}
+}
+	
+
+// 2. Partiendo del array que has construido en el ejercicio anterior, construye un algoritmo que filtre en un nuevo array sólo las cartas rojas, y en otro array las cartas negras.
+
+var array_rojas=[]
+var array_negras=[]
+for (i=0; i<array.length; i=i+1){
+	if (array[i].palo==="P" || array[i].palo==="T"){
+		array_negras[array_negras.length]=array[i];
+	}
+	if (array[i].palo==="D" || array[i].palo==="C"){
+		array_rojas[array_rojas.length]=array[i];
+	}
+}
+
+
+// 3. Partiendo del array que has construido en el ejercicio anterior, construye un algoritmo que filtre en un nuevo array las cartas rojas y pares. Luego imprime en la consola la última carta de ese nuevo array.
+
+var array_paryrojo=[]
+for (i=0; i<array.length; i=i+1){
+	if (array[i].palo==="D" && array[i].valor%2===0 || array[i].palo==="C" && array[i].valor%2===0){
+		array_paryrojo[array_paryrojo.length]=array[i];
+	}
+}
+console.log(array_paryrojo[array_paryrojo.length-1]);
+
+
+
+// MODULO 5
+// 1. Desarrolla una librería Croupier que tenga una función para barajar cartas. Para barajar, intercambiamos una carta aleatoria dentro de nuestra baraja por otra. Y esto lo hacemos 100 veces. Se recomienda usar la librería Math.random. Por ejemplo, intercambiar la carta en la posición 7 por la carta en la posición 24.
+
+cartas = [{palo: "C", valor: 1}, {palo: "D", valor:2}, {palo: "P", valor: 3}, {palo:"T", valor: 4}]
+
+function barajar(cartas){
+	for (i=0; i<=100; i=i+1){
+		var j = Math.floor((Math.random() * cartas.length));
+		var k = Math.floor((Math.random() * cartas.length));
+		var carta1 = cartas[j];
+		var carta2 = cartas[k];
+		cartas[k] = carta1;
+		cartas[j] = carta2;
+	}
+}
+
+var Croupier = {baraja: barajar}
+
+
+// 2. Desarrolla nuevas funciones de la librería Croupier: Repartir, que toma la carta en primera posición de la baraja y la elimina del array Puntuar que, dada una mano de 4 cartas sume su valor. Pero si todas las cartas son iguales, multiplica el valor por 10.
+
+function repartir(cartas){
+	var tu_carta = cartas.splice(0,4);
+	return mano;
+}
+
+function puntuar(mano){
+	var total = 0;
+	for (i=0; i<mano.length; i++){
+      total = total + mano[i].valor;
+    }
+	var multiplicador=10;
+	for (i=0; i<mano.length-1; i++){
+		if (mano[i].valor !== mano[i+1]){
+			multiplicador=1;
+		}
+	}
+	total=total*multiplicador;
+	return total;
+}
+
+var Croupier = {baraja: barajar, reparte: repartir, puntua: puntuar}
+
+
+// 3. Desarrolla una librería Calculadora que calcula las longitudes de varias figuras geométricas como cuadrados, rectángulos y círculos.
+
+var Calculadora = {cuadrado: long_cuadrado, rectangulo: long_rectangulo, circulo: long_circulo};
+
+function long_cuadrado(lado){
+	var longitud = lado * 4;
+	return longitud;
+}
+
+function long_rectangulo(ladomayor, ladomenor){
+	var longitud = ladomenor * 2 + ladomayor * 2;
+	return longitud;
+}
+
+function long_circulo(radio){
+	var longitud = 2*Math.PI*radio;
+	return longitud;
+}
+
+
+
+
+// MODULO 6
+// 1. Desarrolla un objeto Croupier que tenga como datos una baraja de cartas completa. Y puntuaciones especiales para el as y las figuras (jota, dama y rey).
+// Jota = 12
+// Dama = 14
+// Rey = 17
+// As = 20
+ 
+
+function generarBaraja() {
+  var baraja = [];
+  var palos = ["C", "P", "D", "T"];
+  for (i=0; i<palos.length; i++){
+    for (j=1; j<=13; j++){
+      baraja[baraja.length] = {palo: palos[i], valor: j};
+    }
+  }
+  return baraja;
+}
+
+croupier = {};
+
+
+croupier.baraja = generarBaraja();
+
+ 
+// 2. Añade al objeto una función para tomar 5 cartas aleatorias de la baraja. Y luego para puntuar esa mano de cartas con las puntuaciones especiales.
+
+croupier.repartir = function(baraja) {
+	mano = [];
+	for (i=0; i<5; i++){
+		var carta = Math.floor((Math.random() * this.baraja.length));
+		mano[i]=this.baraja.splice(carta,1)[0];
+	}
+	return mano;
+	console.log(mano);
+}
+
