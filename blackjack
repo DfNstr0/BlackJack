@@ -1,0 +1,93 @@
+baraja = generarBaraja();
+
+function generarBaraja() {
+  var baraja = [];
+  var palos = ["C", "P", "D", "T"];
+  for (i=0; i<palos.length; i++){
+    for (j=1; j<=13; j++){
+      baraja[baraja.length] = {palo: palos[i], valor: j};
+    }
+  }
+  return baraja;
+}
+
+var croupier = {};
+
+croupier.baraja = generarBaraja();
+
+croupier.barajar = function(){
+  this.baraja.reverse();
+};
+
+croupier.repartir = function(){
+  console.log(this.baraja[0].valor);
+  var valor = this.baraja[0].valor;
+  var barajaNueva = [];
+  for (i=1; i<this.baraja.length, i++){
+    barajaNueva[barajaNueva.length] = baraja[i];
+  }
+  this.baraja = barajaNueva;
+  return valor;
+}
+
+croupier.puntuar = function(mano){
+  var total = 0;
+  for (i=0; i<mano.length; i=i+1){
+    if (mano[i].valor===1){
+      total = total + 20;
+    }
+    else if (mano[i].valor===11){
+      total = total + 12;
+    }
+    else if (mano[i].valor===12){
+      total = total + 14;
+    }
+    else if (mano[i].valor===13){
+      total = total + 17;
+    }
+    else{
+      total = total + mano[i].valor;
+    }
+  }
+  return total;
+}
+
+
+
+function puntuar(mano){
+	var total = 0;
+	for (i=0; i<mano.length; i++){
+      total = total + mano[i].valor;
+    }
+	var multiplicador=10;
+	for (i=0; i<mano.length-1; i++){
+		if (mano[i].valor !== mano[i+1].valor){
+			multiplicador=1;
+		}
+	}
+	total=total*multiplicador;
+	return total;
+}
+
+
+
+
+
+var jugador = {};
+
+jugador.mano = [];
+
+jugador.pasar = function(){
+  if(this.mano[0].valor>9) return true;
+}
+
+function blackjack(){
+  var miBaraja = baraja;
+  var miCroupier = coupier;
+  var miJugador = jugador;
+
+  while (!jugador.pasar()){
+    croupier
+  }
+  croupier
+}
